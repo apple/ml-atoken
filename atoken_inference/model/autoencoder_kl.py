@@ -226,8 +226,14 @@ class AutoencoderKL(ModelMixin, ConfigMixin, FromOriginalModelMixin):
                 use_checkpoint=True,
             )
 
-        self.logit_scale = nn.Parameter(torch.ones(1))
-        self.logit_bias = nn.Parameter(torch.ones(1))
+        # Current uploaded checkpoints don't include this two, will update, use hardcoded value for now.
+        # once we update the checkpoint, we can use the checkpoint value (which is the same) 
+
+        # self.logit_scale = nn.Parameter(torch.ones(1))
+        # self.logit_bias = nn.Parameter(torch.ones(1))
+
+        self.logit_scale = torch.tensor([4.8438])
+        self.logit_bias = torch.tensor([-15.5625])
 
         self.use_slicing = False
 
