@@ -1,0 +1,27 @@
+---
+model:
+    class_name: models.pretrained.decoder_gs.SLatGaussianDecoderTrain
+    resolution: 64
+    model_channels: 768
+    latent_channels: 768
+    num_blocks: 12
+    num_heads: 12
+    mlp_channels: 3072
+    attn_mode: "swin"
+    window_size: 8
+    representation_config:
+        lr:
+            _xyz: 1.0
+            _features_dc: 1.0
+            _opacity: 1.0
+            _scaling: 1.0
+            _rotation: 0.1
+        perturb_offset: True
+        voxel_size: 1.5
+        num_gaussians: 32
+        2d_filter_kernel_size: 0.1
+        3d_filter_kernel_size: 9.0e-4
+        scaling_bias: 4.0e-3
+        opacity_bias: 0.1
+        scaling_activation: "softplus"
+    # pretrained: /mnt/decode_gs_ema.pt

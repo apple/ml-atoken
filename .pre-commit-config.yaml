@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # - repo: https://github.com/pycqa/pylint
+  #   rev: v3.3.1
+  #   hooks:
+  #     - id: pylint
+  #       additional_dependencies: [
+  #         "absl-py==2.1.0",
+  #         "einops",
+  #         "numpy",
+  #         "torch",
+  #         "torchvision",
+  #         "webdataset==0.2.96",
+  #         "diffusers",
+  #         "transformers==4.52.4",
+  #         "decord",
+  #         "safetensors",
+  #       ]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict

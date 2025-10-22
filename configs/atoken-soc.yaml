@@ -1,0 +1,31 @@
+---
+model:
+    class_name: models.pretrained.autoencoder_kl.AutoencoderKLTrain
+    model_cfg:
+        eval_imagenet_zeroshot: True
+        disentangle_itc_rec: &disentangle_itc_rec True
+        eval_fid: True
+        arch_cfg:
+            patch_size: [4, 16, 16]
+            in_channels: 3072
+            out_channels: 3072
+            latent_channels: &latent_channels 48
+            encoder_model_channels: 1152
+            encoder_num_blocks: 27
+            encoder_num_heads: 16
+            encoder_mlp_channels: 4304
+            encoder_attn_mode: "full"
+            encoder_pe_mode: "joint"
+            encoder_qk_rms_norm: False
+            encoder_use_bias: True
+            encoder_use_rms_norm: False
+            decoder_model_channels: 1152
+            decoder_num_blocks: 27
+            decoder_num_heads: 16
+            decoder_mlp_channels: 4304
+            decoder_attn_mode: "full"
+            decoder_pe_mode: "joint"
+            decoder_qk_rms_norm: True
+            decoder_use_bias: False
+            decoder_use_rms_norm: True
+            use_decoder: True

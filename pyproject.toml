@@ -1,0 +1,127 @@
+[project]
+name = "atoken-inference"
+version = "0.0.1"
+description = "Inference Code for AToken"
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+dependencies = [
+    # Core dependencies
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy",
+    "einops>=0.6.0",
+    "safetensors>=0.3.0",
+    "pillow>=9.0.0",
+    "pyyaml>=6.0",
+    "transformers>=4.30.0",
+    "diffusers>=0.21.0",
+    "scipy",
+]
+
+[project.optional-dependencies]
+# Full installation (video + all features, no flash attention)
+full = [
+    "imageio[ffmpeg]>=2.25.0",
+    "imageio-ffmpeg>=0.4.0",
+    "opencv-python>=4.7.0",
+    "decord>=0.6.0",
+    "absl-py>=2.0.0",
+    "webdataset>=0.2.0",
+    "ftfy>=6.0.0",
+]
+
+# Flash Attention support (requires manual installation)
+# 1. Install full: pip install -e ".[full]"
+# 2. Install flash-attn: pip install flash-attn --no-build-isolation
+flash = [
+    "atoken-inference[full]",
+    "ninja>=1.11.0",
+    "packaging>=21.0",
+]
+
+# Development tools
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+]
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+    "numpy",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["atoken_inference*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.pylint]
+ignore-paths = ["third_party"]
+
+[tool.pylint.format]
+indent-string = "    "
+fail-under = 10
+ignore-long-lines = "<?(http|https|gs|s3)://\\S+>?"
+max-line-length = 100
+
+[tool.pylint.similarities]
+ignore-imports = "yes"
+ignore-docstrings = "yes"
+min-similarity-lines = 20
+
+[tool.pylint."pylint.basic"]
+good-names = ["i", "j", "k", "x", "y", "z", "f", "e", "v", "s", "t", "n", "h", "w", "r", "d", "p", "T", "X", "Y", "Z", "N", "C"]
+
+[tool.pylint.messages_control]
+disable = [
+    "arguments-differ",
+    "too-many-locals",
+    "too-few-public-methods",
+    "too-many-instance-attributes",
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "missing-class-docstring",
+    "abstract-method",
+    "too-many-arguments",
+    "too-many-statements",
+    "import-outside-toplevel",
+    "invalid-name",
+    "fixme",
+    "too-many-branches",
+    "duplicate-code",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"
+markers = [
+    "slow: marks tests as slow",
+    "gpu: marks tests that require GPU",
+    "video: marks tests that process video",
+]
+log_cli = true
+log_cli_level = "WARNING"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
