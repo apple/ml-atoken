@@ -16,6 +16,7 @@ dependencies = [
     "transformers>=4.30.0",
     "diffusers>=0.21.0",
     "scipy",
+    "decord",
 ]
 
 [project.optional-dependencies]
