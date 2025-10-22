@@ -17,6 +17,7 @@ dependencies = [
     "diffusers>=0.21.0",
     "scipy",
     "decord",
+    "open_clip_torch",
 ]
 
 [project.optional-dependencies]
